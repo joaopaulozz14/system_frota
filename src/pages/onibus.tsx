@@ -6,7 +6,6 @@ function Onibus() {
     <div
       className="d-flex justify-content-center flex-wrap gap-4 p-5 bg-light z-3 w-100"
       style={{
-        width: "calc(100% - 250px)",
         height: "100%",
       }}
     >

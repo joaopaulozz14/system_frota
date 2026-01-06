@@ -19,10 +19,10 @@ const NavBar = () => {
   return (
     <>
       <Navbar
-        className="vh-100 position-sticky bg-white border-end"
-        style={{ width: "250px", left: 0, top: 0 }}
+        className="position-fixed vh-100 bg-white border-end"
+        style={{ width: "250px", left: 0, top: 0}}
       >
-        <Container className="flex-column  vh-100  justify-content-start align-items-start">
+        <Container className="flex-column vh-100 justify-content-start align-items-start">
           <Navbar.Brand
             href="#home"
             className=" w-100 text-center text-secondary d-flex align-items-center justify-content-center fw-bold "

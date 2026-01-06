@@ -20,17 +20,16 @@ function OS() {
   }, [totalNumeroPaginacao]);
 
   return (
-    <div className="bg-black ms-5 overflow-auto mt-5 table-fixed" style={{}}>
+    <div className="bg-black p-4 text-white">
       <table
-        className="table table-striped table-hover text-center table-bordered mt-5 h-50"
-        style={{ height: "100%" }}
+        className="table table-striped table-hover text-center table-bordered mt-5"
       >
         <colgroup>
           <col style={{ width: "40px" }} />
           <col style={{ width: "100px" }} />
           <col style={{ width: "250px" }} />
           <col style={{ width: "180px" }} />
-          <col style={{ width: "100px" }} />
+          <col style={{ width: "60px" }} />
           <col style={{ width: "90px" }} />
           <col style={{ width: "120px" }} />
           <col style={{ width: "120px" }} />
@@ -59,7 +58,7 @@ function OS() {
               <tr key={os.id}>
                 <td>{os.id}</td>
                 <td>{bus?.placa}</td>
-                <td className="px-4">{os.descricao}</td>
+                <td className="text-ellipsis">{os.descricao}</td>
 
                 <td style={{ cursor: "pointer" }}>
                   {pecasDaOS.length === 0 ? (
@@ -97,7 +96,7 @@ function OS() {
           })}
         </tbody>
       </table>
-      <div className="d-flex justify-content-center mb-4">
+      <div className="d-flex justify-content-center">
         <ul>
           {numeroPaginacao.map((num) => (
             <button

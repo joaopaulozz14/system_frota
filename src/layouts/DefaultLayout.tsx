@@ -5,11 +5,17 @@ import { Outlet } from "react-router-dom";
 export default function DefaultLayout() {
   return (
     <>
-      <div className="d-flex flex-row ">
+      <div className="d-flex flex-row">
         <NavBar />
-        <main className="ml-5 ">
+        <main
+          style={{
+            marginLeft: "250px",
+            minHeight: "100vh",
+            width: "calc(100% - 250px)",
+          }}
+        >
           <Dashboard />
-          
+
           <Outlet />
         </main>
       </div>

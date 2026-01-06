@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 function Dashboard() {
   return (
     <div
-      className="d-flex align-items-center justify-content-between px-4 bg-white border-bottom position-sticky border-top z-1 "
+      className="d-flex align-items-center justify-content-between px-4 bg-white border-bottom position-sticky border-top z-1 w-100"
       style={{
         height: "76px",
       }}
@@ -17,6 +17,6 @@ function Dashboard() {
       </div>
     </div>
   );
-}
+} 
 
 export default Dashboard;
