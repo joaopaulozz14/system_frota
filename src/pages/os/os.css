@@ -20,6 +20,6 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 110px; /* largura do maior texto "Em andamento" */
+  min-width: 100px; /* largura do maior texto "Em andamento" */
   padding: 0.4em 0.6em;
 }
