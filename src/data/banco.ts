@@ -395,6 +395,9 @@ export const pecas: PecaType[] = [
     descricao: "Amortecedor traseiro para ônibus urbano",
     unidade: "un",
     onibus_id: 1,
+    status: "Em estoque",
+    categoria: "Suspensão",
+    valor: 850.0,
   },
   {
     id: 102,
@@ -404,6 +407,9 @@ export const pecas: PecaType[] = [
     descricao: "Pastilha dianteira para freio a disco",
     unidade: "jogo",
     onibus_id: undefined,
+    status: "Baixo estoque",
+    categoria: "Freios",
+    valor: 420.5,
   },
   {
     id: 103,
@@ -413,6 +419,9 @@ export const pecas: PecaType[] = [
     descricao: "Filtro de ar para motor diesel",
     unidade: "un",
     onibus_id: 3,
+    status: "Em estoque",
+    categoria: "Motor",
+    valor: 95.9,
   },
   {
     id: 104,
@@ -422,6 +431,9 @@ export const pecas: PecaType[] = [
     descricao: "Óleo lubrificante semissintético para motor Diesel",
     unidade: "litro",
     onibus_id: undefined,
+    status: "Em estoque",
+    categoria: "Lubrificantes",
+    valor: 32.0,
   },
   {
     id: 105,
@@ -431,6 +443,9 @@ export const pecas: PecaType[] = [
     descricao: "Correia dentada para motor Mercedes OM-924",
     unidade: "un",
     onibus_id: 2,
+    status: "Esgotado",
+    categoria: "Motor",
+    valor: 310.75,
   },
   {
     id: 106,
@@ -440,6 +455,9 @@ export const pecas: PecaType[] = [
     descricao: "Lâmpada para farol baixo H7",
     unidade: "un",
     onibus_id: undefined,
+    status: "Em estoque",
+    categoria: "Iluminação",
+    valor: 48.9,
   },
   {
     id: 107,
@@ -449,26 +467,8 @@ export const pecas: PecaType[] = [
     descricao: "Terminal de direção reforçado para ônibus rodoviário",
     unidade: "un",
     onibus_id: 4,
-  },
-];
-
-export const estoquePecas: EstoqueType[] = [
-  {
-    id: 1,
-    peca_id: 101,
-    quantidade: 15,
-    data: "2025-01-10",
-  },
-  {
-    id: 2,
-    peca_id: 102,
-    quantidade: 8,
-    data: "2025-01-12",
-  },
-  {
-    id: 3,
-    peca_id: 103,
-    quantidade: 20,
-    data: "2025-01-15",
+    status: "Baixo estoque",
+    categoria: "Direção",
+    valor: 560.0,
   },
 ];

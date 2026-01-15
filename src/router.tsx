@@ -3,7 +3,7 @@ import Home from "./pages/home";
 import Onibus from "./pages/onibus";
 import OS from "./pages/os/os";
 import DefaultLayout from "./layouts/DefaultLayout";
-import ListaPecas from "./pages/listaPecas";
+import ListaPecas from "./pages/listaPecas/listaPecas";
 /* import { useAuth } from './contexts/auth'; */
 
 const Router = () => {

@@ -6,4 +6,7 @@ export type PecaType = {
   descricao: string;
   unidade: string;
   onibus_id?: number;
+  status: "Em estoque" | "Baixo estoque" | "Esgotado";
+  categoria: string;
+  valor: number;
 };

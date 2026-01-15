@@ -1,15 +1,15 @@
 import { useMemo, useState } from "react";
 import { onibus, ordensDeServico, pecas } from "../data/banco";
 
-function TableOS() {
+function TablePecas() {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const itensPorPagina = 10;
   const inicio = (paginaAtual - 1) * itensPorPagina;
   const fim = inicio + itensPorPagina;
-  const osPagina = ordensDeServico.slice(inicio, fim);
+  const osPagina = pecas.slice(inicio, fim);
 
   const totalNumeroPaginacao = Math.ceil(
-    ordensDeServico.length / itensPorPagina
+    pecas.length / itensPorPagina
   );
   const numeroPaginacao = useMemo(() => {
     return Array.from({ length: totalNumeroPaginacao }, (_, i) => i + 1);
@@ -22,7 +22,7 @@ function TableOS() {
           <col style={{ width: "20px" }} />
           <col style={{ width: "60px" }} />
           <col style={{ width: "250px" }} />
-          <col style={{ width: "140px" }} />
+          <col style={{ width: "20px" }} />
           <col style={{ width: "50px" }} />
           <col style={{ width: "60px" }} />
           <col style={{ width: "60px" }} />
@@ -30,61 +30,44 @@ function TableOS() {
         </colgroup>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Ônibus</th>
+            <th>Peça</th>
+            <th>Código</th>
             <th>Descrição</th>
-            <th>Peças</th>
+            <th>Fabricante</th>
+            <th>Categoria</th>
+            <th>Valor</th>
             <th>Status</th>
-            <th>KM</th>
-            <th>Abertura</th>
-            <th>Fechamento</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>
-          {osPagina.map((os) => {
-            const bus = onibus.find((o) => o.id === os.onibus_id);
-            const pecasDaOS = os.pecas.map((item) => ({
-              ...item,
-              info: pecas.find((p) => p.id === item.peca_id),
-            }));
+          {pecas.map((peca) => {
             return (
-              <tr key={os.id}>
-                <td>{os.id}</td>
-                <td>{bus?.placa ?? "-"}</td>
-                <td className="text-ellipsis" title={os.descricao}>
-                  {os.descricao}
+              <tr key={peca.id}>
+                <td>{peca.nome}</td>
+                <td>{peca.codigo}</td>
+                <td className="text-ellipsis" title={peca.descricao}>
+                  {peca.descricao}
+                  {peca.descricao}
                 </td>
-                <td>
-                  {pecasDaOS.length === 0 ? (
-                    <span className="text-muted form-select form-select-sm">
-                      Nenhuma peça
-                    </span>
-                  ) : (
-                    <select className="form-select form-select-sm">
-                      {pecasDaOS.map((p) => (
-                        <option key={p.peca_id} value={p.peca_id}>
-                          {p.info?.nome} ({p.quantidade})
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                </td>
-                <td className="status-cell">
+                <td>{peca.fabricante}</td>
+                <td>{peca.categoria}</td>
+               
+                <td>R$ {peca.valor}</td>
+                 <td className="status-cell">
                   <span
                     className={`badge ${
-                      os.status === "Fechado"
+                      peca.status === "Esgotado"
                         ? "bg-danger"
-                        : os.status === "Aberto"
+                        : peca.status === "Em estoque"
                         ? "bg-success"
                         : "bg-warning"
                     }`}
                   >
-                    {os.status}
+                    {peca.status}
                   </span>
                 </td>
-                <td>{os.km_registrado}</td>
-                <td>{os.data_abertura}</td>
-                <td>{os.data_fechamento || "-"}</td>
+                <td>Ação</td>
               </tr>
             );
           })}
@@ -108,4 +91,4 @@ function TableOS() {
   );
 }
 
-export default TableOS;
+export default TablePecas;

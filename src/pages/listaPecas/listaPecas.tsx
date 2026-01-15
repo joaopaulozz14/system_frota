@@ -1,5 +1,4 @@
-import { ordensDeServico } from "../../data/banco";
-import "./os.css";
+import { pecas } from "../../data/banco";
 
 import {
   Archive,
@@ -9,17 +8,17 @@ import {
 } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import TableOS from "../../components/tableOS";
-function OS() {
+import TablePecas from "../../components/tablePecas";
+function ListaPecas() {
   return (
-    
     <div className="os-container container bg-light">
       <div className="row g-3 mb-4 pt-4">
         <div className="col-md-3" style={{ cursor: "pointer" }}>
           <div className="card px-2 shadow-sm cursor-pointer">
             <div className="card-body d-flex justify-content-between align-items-center">
               <div>
-                <h6 className="card-title text-muted">Total de OS</h6>
-                <h4 className="fw-bold">{ordensDeServico.length}</h4>
+                <h6 className="card-title text-muted">Total de Peças</h6>
+                <h4 className="fw-bold">{pecas.length}</h4>
               </div>
               <div className="rounded-5 p-3 " style={{ background: "#DBEAFE" }}>
                 <Box size={25} className="text-primary" />
@@ -32,12 +31,9 @@ function OS() {
           <div className="card px-2 shadow-sm cursor-pointer border-success">
             <div className="card-body d-flex justify-content-between align-items-center">
               <div>
-                <h6 className="card-title text-muted">Abertas</h6>
+                <h6 className="card-title text-muted">Em Estoque</h6>
                 <h4 className="fw-bold text-success">
-                  {
-                    ordensDeServico.filter((os) => os.status === "Aberto")
-                      .length
-                  }
+                  {pecas.filter((peca) => peca.status === "Em estoque").length}
                 </h4>
               </div>
               <div className="rounded-5 p-3 " style={{ background: "#DCFCE7" }}>
@@ -55,10 +51,10 @@ function OS() {
           <div className="card px-2 shadow-sm cursor-pointer border-warning">
             <div className="card-body d-flex justify-content-between align-items-center">
               <div>
-                <h6 className="card-title text-muted">Em execução</h6>
+                <h6 className="card-title text-muted">Baixo Estoque</h6>
                 <h4 className="fw-bold text-warning">
                   {
-                    ordensDeServico.filter((os) => os.status === "Em andamento")
+                    pecas.filter((peca) => peca.status === "Baixo estoque")
                       .length
                   }
                 </h4>
@@ -78,10 +74,10 @@ function OS() {
           <div className="card px-2 text-center shadow-sm border-danger">
             <div className="card-body d-flex justify-content-between align-items-center">
               <div>
-                <h6 className="card-title text-muted">Fechadas</h6>
+                <h6 className="card-title text-muted">Esgotado</h6>
                 <h4 className="fw-bold text-danger">
                   {
-                    ordensDeServico.filter((os) => os.status === "Fechado")
+                    pecas.filter((peca) => peca.status === "Esgotado")
                       .length
                   }
                 </h4>
@@ -96,20 +92,20 @@ function OS() {
 
       <div className="d-flex justify-content-between align-items-center">
         <div>
-          <h6 className="fw-bold">Lista de OS</h6>
-          <p>Gerencie suas ordens de serviços</p>
+          <h6 className="fw-bold">Lista de Peças</h6>
+          <p>Gerencie seus itens de estoque e níveis de inventário</p>
         </div>
 
         <div>
           <Button variant="primary" className="mb-3">
-           + Adicionar OS
+            + Adicionar OS
           </Button>
         </div>
       </div>
 
-      <TableOS />
+      <TablePecas />
     </div>
   );
 }
 
-export default OS;
+export default ListaPecas;
