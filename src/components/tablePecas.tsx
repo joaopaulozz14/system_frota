@@ -1,16 +1,15 @@
 import { useMemo, useState } from "react";
-import { onibus, ordensDeServico, pecas } from "../data/banco";
+import {  pecas } from "../data/banco";
+import { PencilSquare, TrashFill } from "react-bootstrap-icons";
 
 function TablePecas() {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const itensPorPagina = 10;
   const inicio = (paginaAtual - 1) * itensPorPagina;
   const fim = inicio + itensPorPagina;
-  const osPagina = pecas.slice(inicio, fim);
+  const pagina = pecas.slice(inicio, fim);
 
-  const totalNumeroPaginacao = Math.ceil(
-    pecas.length / itensPorPagina
-  );
+  const totalNumeroPaginacao = Math.ceil(pecas.length / itensPorPagina);
   const numeroPaginacao = useMemo(() => {
     return Array.from({ length: totalNumeroPaginacao }, (_, i) => i + 1);
   }, [totalNumeroPaginacao]);
@@ -43,18 +42,17 @@ function TablePecas() {
         <tbody>
           {pecas.map((peca) => {
             return (
-              <tr key={peca.id}>
-                <td>{peca.nome}</td>
-                <td>{peca.codigo}</td>
-                <td className="text-ellipsis" title={peca.descricao}>
-                  {peca.descricao}
+              <tr key={peca.id} className="text-ellipsis">
+                <td className="text-ellipsis" title={peca.nome}> {peca.nome}</td>
+                <td title={peca.codigo}>{peca.codigo}</td>
+                <td  className="text-ellipsis" title={peca.descricao}>
                   {peca.descricao}
                 </td>
                 <td>{peca.fabricante}</td>
                 <td>{peca.categoria}</td>
-               
+
                 <td>R$ {peca.valor}</td>
-                 <td className="status-cell">
+                <td className="status-cell">
                   <span
                     className={`badge ${
                       peca.status === "Esgotado"
@@ -67,7 +65,20 @@ function TablePecas() {
                     {peca.status}
                   </span>
                 </td>
-                <td>Ação</td>
+                <td>
+                  <PencilSquare
+                    size={15}
+                    color="#828282"
+                    className="text-primary"
+                    style={{ cursor: "pointer" }}
+                  />
+                  <TrashFill
+                    size={15}
+                    color="#828282"
+                    className="ms-3 text-primary"
+                    style={{ cursor: "pointer" }}
+                  />
+                </td>
               </tr>
             );
           })}

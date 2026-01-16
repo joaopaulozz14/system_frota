@@ -7,8 +7,8 @@ import {
   FileEarmarkCheckFill,
 } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
-import TableOS from "../../components/tableOS";
 import TablePecas from "../../components/tablePecas";
+import "./listaPecas.css";
 function ListaPecas() {
   return (
     <div className="os-container container bg-light">
