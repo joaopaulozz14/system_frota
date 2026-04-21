@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { onibus, ordensDeServico, pecas } from "../data/banco";
+import { useNavigate } from "react-router-dom";
 
 function TableOS() {
   const [paginaAtual, setPaginaAtual] = useState(1);
@@ -9,12 +10,13 @@ function TableOS() {
   const osPagina = ordensDeServico.slice(inicio, fim);
 
   const totalNumeroPaginacao = Math.ceil(
-    ordensDeServico.length / itensPorPagina
+    ordensDeServico.length / itensPorPagina,
   );
   const numeroPaginacao = useMemo(() => {
     return Array.from({ length: totalNumeroPaginacao }, (_, i) => i + 1);
   }, [totalNumeroPaginacao]);
 
+  const navigate = useNavigate();
   return (
     <div className="bg-white p-3 rounded shadow-sm mb-4">
       <table className="table table-responsive text-center align-middle table-hover">
@@ -48,7 +50,11 @@ function TableOS() {
               info: pecas.find((p) => p.id === item.peca_id),
             }));
             return (
-              <tr key={os.id}>
+              <tr
+                key={os.id}
+                onClick={() => navigate(`/os/${os.id}`, { state: { os, bus, pecasDaOS } })}
+                style={{ cursor: "pointer" }}
+              >
                 <td>{os.id}</td>
                 <td>{bus?.placa ?? "-"}</td>
                 <td className="text-ellipsis" title={os.descricao}>
@@ -75,8 +81,8 @@ function TableOS() {
                       os.status === "Fechado"
                         ? "bg-danger"
                         : os.status === "Aberto"
-                        ? "bg-success"
-                        : "bg-warning"
+                          ? "bg-success"
+                          : "bg-warning"
                     }`}
                   >
                     {os.status}

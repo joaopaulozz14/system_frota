@@ -41,7 +41,7 @@ const NavBar = () => {
               Menu principal
             </div>
             <Nav.Link
-              href="/home"
+              href="/"
               className="d-flex align-items-center justify-content-start ms-2 gap-2"
             >
               <House /> Dashboard

@@ -14,6 +14,7 @@ function OS() {
     
     <div className="os-container container bg-light">
       <div className="row g-3 mb-4 pt-4">
+        
         <div className="col-md-3" style={{ cursor: "pointer" }}>
           <div className="card px-2 shadow-sm cursor-pointer">
             <div className="card-body d-flex justify-content-between align-items-center">
@@ -93,6 +94,7 @@ function OS() {
           </div>
         </div>
       </div>
+
 
       <div className="d-flex justify-content-between align-items-center">
         <div>
