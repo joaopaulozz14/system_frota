@@ -2,6 +2,9 @@ import { useLocation } from "react-router-dom";
 import photo from "../../assets/onibusfoto.jpeg";
 import type { PecaType } from "../../types/pecaType";
 import type { OrdemServicoType } from "../../types/ordemServicoType";
+import { historicoOS } from "../../data/banco";
+import { FaCheck, FaPencilAlt, FaArrowRight } from "react-icons/fa";
+
 export default function PaginaDetalhesOS() {
   type PecaDaOSType = {
     peca_id: number;
@@ -22,10 +25,19 @@ export default function PaginaDetalhesOS() {
           OS #{os.id} - {os.descricao}
         </h4>
 
-        <div>
-          <button>Finalizar OS</button>
-          <button>Editar</button>
-          <button>Voltar</button>
+        <div className="d-flex gap-1">
+          <button
+            type="button"
+            className="btn btn-success d-flex align-items-center justify-content-start gap-2"
+          >
+            <FaCheck /> Finalizar OS
+          </button>
+          <button type="button"   className="btn btn-primary d-flex align-items-center justify-content-start gap-2">
+            <FaPencilAlt /> Editar
+          </button>
+          <button type="button" className="btn btn-secondary d-flex align-items-center justify-content-start gap-2">
+            <FaArrowRight /> Voltar
+          </button>
         </div>
       </div>
       <span>{os.status}</span>
@@ -138,6 +150,16 @@ export default function PaginaDetalhesOS() {
               className="w-100"
             />
             <p>{bus?.placa || "-"}</p>
+          </div>
+          <div className="container-sm d-flex flex-column bg-white justify-content-around border rounded shadow-sm mt-4 pt-3 ps-3">
+            <p>Histórico da OS</p>
+            <ul>
+              {historicoOS[os.id]?.map((h, index) => (
+                <li key={index}>
+                  {h.data} - {h.acao}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

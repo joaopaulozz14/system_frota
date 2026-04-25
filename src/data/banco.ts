@@ -1,5 +1,5 @@
+import type { HistoricoOS } from "../types/historicoOS";
 import type { PecaType } from "../types/pecaType";
-
 export const onibus = [
   {
     id: 1,
@@ -493,3 +493,44 @@ export const pecas: PecaType[] = [
     valor: 75.5,
   },
 ];
+
+export const historicoOS: Record<number, HistoricoOS[]> = {
+  1: [
+    {
+      data: "2024-01-10 08:32",
+      autor: "João",
+      acao: "OS criada",
+    },
+    {
+      data: "2024-01-10 09:10",
+      autor: "Carlos",
+      acao: "Peças adicionadas na OS",
+    },
+    {
+      data: "2024-01-11 16:45",
+      autor: "Carlos",
+      acao: "OS finalizada",
+    },
+  ],
+
+  2: [
+    {
+      data: "2024-02-03 08:10",
+      autor: "Marcos",
+      acao: "OS criada",
+    },
+    {
+      data: "2024-02-03 10:22",
+      autor: "Marcos",
+      acao: "Peça adicionada (Pastilha de freio)",
+    },
+  ],
+
+  3: [
+    {
+      data: "2024-02-18 07:55",
+      autor: "João",
+      acao: "OS criada",
+    },
+  ],
+};
