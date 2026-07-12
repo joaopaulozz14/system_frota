@@ -1,28 +1,36 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import photo from "../../assets/onibusfoto.jpeg";
 import type { PecaType } from "../../types/pecaType";
 import type { OrdemServicoType } from "../../types/ordemServicoType";
 import { historicoOS } from "../../data/banco";
 import { FaCheck, FaPencilAlt, FaArrowRight } from "react-icons/fa";
+import getOSCompleta from "../../utils/osUtils";
 
 export default function PaginaDetalhesOS() {
-  type PecaDaOSType = {
+  const { id } = useParams<{ id: string }>();
+  const osCompleta = getOSCompleta(Number(id));
+
+  /* type PecaDaOSType = {
     peca_id: number;
     quantidade: number;
     info?: PecaType;
-  };
-  const location = useLocation();
+  }; */
+  /* const location = useLocation();
   const os: OrdemServicoType = location.state?.os;
   const bus = location.state?.bus;
-  const pecasDaOS: PecaDaOSType[] = location.state?.pecasDaOS || [];
+  const pecasDaOS: PecaDaOSType[] = location.state?.pecasDaOS || []; */
 
-  console.log(pecasDaOS);
+  /*   console.log(pecasDaOS); */
+
+  if (!osCompleta) {
+    return <div>OS não encontrada</div>;
+  }
 
   return (
     <div className="container-fluid bg-light p-4 h-100 d-flex flex-column align-content-start justify-content-start">
       <div className="d-flex justify-content-between">
         <h4>
-          OS #{os.id} - {os.descricao}
+          OS #{osCompleta.os.id} - {osCompleta.os.descricao}
         </h4>
 
         <div className="d-flex gap-1">
@@ -32,15 +40,21 @@ export default function PaginaDetalhesOS() {
           >
             <FaCheck /> Finalizar OS
           </button>
-          <button type="button"   className="btn btn-primary d-flex align-items-center justify-content-start gap-2">
+          <button
+            type="button"
+            className="btn btn-primary d-flex align-items-center justify-content-start gap-2"
+          >
             <FaPencilAlt /> Editar
           </button>
-          <button type="button" className="btn btn-secondary d-flex align-items-center justify-content-start gap-2">
+          <button
+            type="button"
+            className="btn btn-secondary d-flex align-items-center justify-content-start gap-2"
+          >
             <FaArrowRight /> Voltar
           </button>
         </div>
       </div>
-      <span>{os.status}</span>
+      <span>{osCompleta.os.status}</span>
 
       <div className="row mt-4">
         <div className="col-md-8">
@@ -53,13 +67,13 @@ export default function PaginaDetalhesOS() {
                 <p>
                   <strong>Onibus:</strong>
                 </p>
-                <p> {bus?.placa ?? "-"}</p>
+                <p> {osCompleta.bus?.placa ?? "-"}</p>
               </div>
               <div className="col">
                 <p>
                   <strong>KM na abertura:</strong>{" "}
                 </p>
-                <p>{os.km_registrado}</p>
+                <p>{osCompleta.os.km_registrado}</p>
               </div>
             </div>
             <div
@@ -70,16 +84,16 @@ export default function PaginaDetalhesOS() {
                 <p>
                   <strong>Data de abertura:</strong>
                 </p>
-                <p>{os.data_abertura}</p>
+                <p>{osCompleta.os.data_abertura}</p>
               </div>
               <div className="col">
                 <p>
                   <strong>Data de fechamento:</strong>
                 </p>
-                <p> {os.data_fechamento || "-"}</p>
+                <p> {osCompleta.os.data_fechamento || "-"}</p>
               </div>
             </div>
-            <p className="mt-2">{os.descricao}</p>
+            <p className="mt-2">{osCompleta.os.descricao}</p>
           </div>
 
           <div className="container-sm pt-3 ms-0 mt-4 border rounded shadow-sm bg-white table-responsive-sm">
@@ -96,7 +110,7 @@ export default function PaginaDetalhesOS() {
                 </tr>
               </thead>
               <tbody>
-                {pecasDaOS.length === 0 ? (
+                {osCompleta.pecasDaOS.length === 0 ? (
                   <tr>
                     <td colSpan={4} className="text-muted text-center">
                       Nenhuma peça utilizada
@@ -111,7 +125,7 @@ export default function PaginaDetalhesOS() {
                       <td>{p.quantidade}</td>
                     </tr>
                   )) */
-                  pecasDaOS.map((p) => (
+                  osCompleta.pecasDaOS.map((p) => (
                     <tr key={p.peca_id}>
                       <td>{p.info?.nome}</td>
                       <td>{p.info?.codigo}</td>
@@ -129,7 +143,7 @@ export default function PaginaDetalhesOS() {
               <strong>Observações</strong>
             </p>
             <div>
-              {os.observacoes.map((obs, index) => (
+              {osCompleta.os.observacoes.map((obs, index) => (
                 <div key={index} className="mb-3 border-bottom pb-2">
                   <small className="text-muted">
                     {obs.data} - {obs.autor}
@@ -145,16 +159,16 @@ export default function PaginaDetalhesOS() {
           <div className="container-sm d-flex flex-column align-items-center bg-white justify-content-around p-4 border rounded shadow-sm">
             <p>Onibus</p>
             <img
-              src={bus?.imagem || photo}
+              src={photo}
               alt="Imagem do Ônibus"
               className="w-100"
             />
-            <p>{bus?.placa || "-"}</p>
+            <p>{osCompleta.bus?.placa || "-"}</p>
           </div>
           <div className="container-sm d-flex flex-column bg-white justify-content-around border rounded shadow-sm mt-4 pt-3 ps-3">
             <p>Histórico da OS</p>
             <ul>
-              {historicoOS[os.id]?.map((h, index) => (
+              {historicoOS[osCompleta.os.id]?.map((h, index) => (
                 <li key={index}>
                   {h.data} - {h.acao}
                 </li>

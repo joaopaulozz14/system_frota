@@ -52,7 +52,7 @@ function TableOS() {
             return (
               <tr
                 key={os.id}
-                onClick={() => navigate(`/os/${os.id}`, { state: { os, bus, pecasDaOS } })}
+                onClick={() => navigate(`/os/${os.id}`)}
                 style={{ cursor: "pointer" }}
               >
                 <td>{os.id}</td>

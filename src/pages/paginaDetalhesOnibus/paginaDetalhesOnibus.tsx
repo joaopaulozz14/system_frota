@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { onibus, ordensDeServico, pecas } from "../../data/banco";
 import Info from "../../components/Info";
 /**
@@ -9,6 +9,7 @@ import Info from "../../components/Info";
  */
 
 export default function ModeloPaginaOnibus() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const bus = onibus.find((b) => b.id === Number(id));
   const busId = Number(id);
@@ -100,6 +101,7 @@ export default function ModeloPaginaOnibus() {
                       className="table-hover"
                       style={{ maxHeight: "50px", cursor: "pointer" }}
                       key={i.id}
+                      onClick={() => navigate(`/os/${i.id}`)}
                     >
                       <td>#{i.id}</td>
                       <td>{i.descricao}</td>
