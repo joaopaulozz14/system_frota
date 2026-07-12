@@ -1,7 +1,7 @@
 import photo from "../assets/onibusfoto.jpeg";
 import { onibus } from "../data/banco";
 import { NavLink } from "react-router-dom";
-import { Nav} from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 function Onibus() {
   return (
@@ -17,7 +17,6 @@ function Onibus() {
           to={`/onibus/${bus.id}`}
           className="d-flex align-items-center justify-content-start ms-2 gap-2"
         >
-          
           <div
             className="card bg-light p-5 my-5 text-dark border bg-white shadow"
             style={{ maxWidth: "400px", maxHeight: "450px" }}

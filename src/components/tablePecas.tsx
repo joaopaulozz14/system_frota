@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import {  pecas } from "../data/banco";
 import { PencilSquare, TrashFill } from "react-bootstrap-icons";
-
 function TablePecas() {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const itensPorPagina = 10;
   const inicio = (paginaAtual - 1) * itensPorPagina;
   const fim = inicio + itensPorPagina;
-  const pagina = pecas.slice(inicio, fim);
+  const pecasPagina = pecas.slice(inicio, fim);
 
   const totalNumeroPaginacao = Math.ceil(pecas.length / itensPorPagina);
   const numeroPaginacao = useMemo(() => {
@@ -20,7 +19,7 @@ function TablePecas() {
         <colgroup>
           <col style={{ width: "20px" }} />
           <col style={{ width: "60px" }} />
-          <col style={{ width: "250px" }} />
+          <col style={{ width: "150px" }} />
           <col style={{ width: "20px" }} />
           <col style={{ width: "50px" }} />
           <col style={{ width: "60px" }} />
@@ -31,7 +30,7 @@ function TablePecas() {
           <tr>
             <th>Peça</th>
             <th>Código</th>
-            <th>Descrição</th>
+            <th>Aplicação</th>
             <th>Fabricante</th>
             <th>Categoria</th>
             <th>Valor</th>
@@ -40,13 +39,28 @@ function TablePecas() {
           </tr>
         </thead>
         <tbody>
-          {pecas.map((peca) => {
+          {pecasPagina.map((peca) => {
             return (
               <tr key={peca.id} className="text-ellipsis">
                 <td className="text-ellipsis" title={peca.nome}> {peca.nome}</td>
                 <td title={peca.codigo}>{peca.codigo}</td>
-                <td  className="text-ellipsis" title={peca.descricao}>
+                {/* <td  className="text-ellipsis" title={peca.descricao}>
                   {peca.descricao}
+                </td> */}
+                 <td className="text-center">
+                  {peca.aplicacao === undefined ? (
+                    <span className="text-muted form-select form-select-sm">
+                      Nenhuma peça
+                    </span>
+                  ) : (
+                    <select className="form-select form-select-sm text-ellipsis">
+                      {peca.aplicacao.map((p) => (
+                        <option key={p.id} value={p.id} style={{textAlign: "center"}}>
+                          {p.modelo}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </td>
                 <td>{peca.fabricante}</td>
                 <td>{peca.categoria}</td>

@@ -5,6 +5,7 @@ import OS from "./pages/os/os";
 import DefaultLayout from "./layouts/DefaultLayout";
 import ListaPecas from "./pages/listaPecas/listaPecas";
 import PaginaDetalheOnibus from "./pages/paginaDetalhesOnibus/paginaDetalhesOnibus";
+import PaginaDetalhesOS from "./pages/paginaDetalhesOS/paginaDetalhesOS";
 /* import { useAuth } from './contexts/auth'; */
 
 const Router = () => {
@@ -15,10 +16,10 @@ const Router = () => {
       <Route element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/onibus" element={<Onibus />} />
-        <Route path="/os" element={<OS />} />
-        <Route path="/pecas" element={<ListaPecas />} />
         <Route path="/onibus/:id" element={<PaginaDetalheOnibus />} />
-
+        <Route path="/os" element={<OS />} />
+        <Route path="/os/:id" element={<PaginaDetalhesOS />} />
+        <Route path="/pecas" element={<ListaPecas />} />
       </Route>
     </Routes>
   );

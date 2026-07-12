@@ -6,5 +6,6 @@ export type OnibusType = {
   ano: number;
   km_atual: number;
   proxima_revisao: string;
+  status: string;
   km_ultima_troca_oleo?: number;
 };

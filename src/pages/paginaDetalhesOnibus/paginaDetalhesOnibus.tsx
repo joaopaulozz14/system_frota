@@ -1,11 +1,51 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
-
+import { useParams } from "react-router-dom";
+import { onibus, ordensDeServico, pecas } from "../../data/banco";
+import Info from "../../components/Info";
 /**
  * MODELO VISUAL – Página de Detalhe do Ônibus
  * Versão usando Bootstrap (Cards, Grid e Tables)
  */
+
 export default function ModeloPaginaOnibus() {
+  const { id } = useParams();
+  const bus = onibus.find((b) => b.id === Number(id));
+  const busId = Number(id);
+
+  const count = ordensDeServico.filter((b) => b.onibus_id === busId).length;
+  const pecasDaOS = ordensDeServico
+    .filter((os) => os.onibus_id === busId)
+    .flatMap((os) => os.pecas);
+  /* console.log(pecasDaOS); */
+
+  const pecasInfo = pecasDaOS.map((item) => ({
+    ...item,
+    info: pecas.find((p) => p.id === item.peca_id),
+  }));
+
+  const uniquePecasInfo = Array.from(
+    new Set(pecasInfo.map((p) => p.peca_id)),
+  ).map((id) => pecasInfo.find((p) => p.peca_id === id)!);
+
+  const camposInfo = [
+    { label: "Placa", value: bus?.placa },
+    { label: "Modelo", value: bus?.modelo },
+    { label: "Marca", value: bus?.marca },
+    { label: "Ano", value: bus?.ano },
+    { label: "KM Atual", value: bus?.km_atual },
+    { label: "Próxima Revisão", value: bus?.proxima_revisao },
+    { label: "Status", value: bus?.status },
+    { label: "KM Última Troca de Óleo", value: bus?.km_ultima_troca_oleo },
+  ];
+  if (!bus) {
+    return (
+      <div className="container-fluid p-4">
+        <p>Ônibus não encontrado</p>
+      </div>
+    );
+  }
+
   return (
     <div className="p-4">
       {/* Cabeçalho */}
@@ -18,32 +58,30 @@ export default function ModeloPaginaOnibus() {
       <div className="card mb-4">
         <div className="card-body">
           <div className="row g-3">
-            <Info label="Prefixo" />
-            <Info label="Placa" />
-            <Info label="Modelo" />
-            <Info label="Status" />
-            <Info label="KM Atual" />
-            <Info label="Ano" />
-            <Info label="Empresa" />
-            <Info label="Última Revisão" />
+            {camposInfo.map((c, i) => (
+              <Info key={i} {...c} />
+            ))}
           </div>
         </div>
       </div>
 
       {/* Métricas */}
       <div className="row g-3 mb-4">
-        <Metric title="Total de OS" />
+        <Metric title="Total de OS" value={count} />
         <Metric title="Previsão troca de óleo" />
         <Metric title="KM médio / dia" />
         <Metric title="Custo mensal" />
       </div>
 
       {/* Histórico de OS */}
-      <div className="card mb-4">
+      <div
+        className="card mb-4"
+        style={{ maxHeight: "510px", overflowY: "auto" }}
+      >
         <div className="card-body">
           <h2 className="h6 mb-3">Histórico de Ordens de Serviço</h2>
           <div className="table-responsive">
-            <table className="table table-sm align-middle">
+            <table className="table table-sm align-middle table-hover">
               <thead className="table-light">
                 <tr>
                   <th>OS</th>
@@ -55,16 +93,24 @@ export default function ModeloPaginaOnibus() {
                 </tr>
               </thead>
               <tbody>
-                {[1, 2, 3].map(i => (
-                  <tr key={i}>
-                    <td>#000{i}</td>
-                    <td>Descrição da OS</td>
-                    <td>Fechado</td>
-                    <td>74.500</td>
-                    <td>28/01/2024</td>
-                    <td>29/01/2024</td>
-                  </tr>
-                ))}
+                {ordensDeServico
+                  .filter((i) => i.onibus_id === busId)
+                  .map((i) => (
+                    <tr
+                      className="table-hover"
+                      style={{ maxHeight: "50px", cursor: "pointer" }}
+                      key={i.id}
+                    >
+                      <td>#{i.id}</td>
+                      <td>{i.descricao}</td>
+                      <td>{i.status}</td>
+                      <td>{i.km_registrado}</td>
+                      <td>{i.data_abertura}</td>
+                      <td>
+                        {i.data_fechamento ? i.data_fechamento : "Em andamento"}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -74,24 +120,36 @@ export default function ModeloPaginaOnibus() {
       {/* Peças utilizadas */}
       <div className="card mb-4">
         <div className="card-body">
-          <h2 className="h6 mb-3">Peças Utilizadas</h2>
+          <h2 className="h6 mb-3">Histórico de Peças Utilizadas</h2>
           <div className="table-responsive">
-            <table className="table table-sm">
+            <table className="table table-sm table-hover">
               <thead className="table-light">
                 <tr>
                   <th>Peça</th>
                   <th>Categoria</th>
-                  <th>Quantidade</th>
+                  <th>Código</th>
                 </tr>
               </thead>
               <tbody>
-                {[1, 2].map(i => (
-                  <tr key={i}>
-                    <td>Nome da peça</td>
-                    <td>Motor</td>
-                    <td>1</td>
+                {pecasDaOS.length === 0 ? (
+                  <tr style={{ cursor: "pointer" }}>
+                    <td colSpan={3} className="text-muted">
+                      Nenhuma peça utilizada
+                    </td>
                   </tr>
-                ))}
+                ) : (
+                  uniquePecasInfo.map((i) => (
+                    <tr>
+                      <td>{i.info?.nome}</td>
+                      <td>{i.info?.categoria}</td>
+                      <td>{i.info?.codigo}</td>
+                    </tr>
+                  ))
+                )}
+                {/* <tr key={i.peca_id}>
+                      <td>{i.peca_id}</td>
+                      <td>{i.quantidade}</td>
+                    </tr> */}
               </tbody>
             </table>
           </div>
@@ -113,25 +171,15 @@ export default function ModeloPaginaOnibus() {
   );
 }
 
-function Info({ label }: { label: string }) {
-  return (
-    <div className="col-6 col-md-3">
-      <div className="text-muted small">{label}</div>
-      <div className="fw-semibold">—</div>
-    </div>
-  );
-}
-
-function Metric({ title }: { title: string }) {
+function Metric({ title, value }: { title: string; value?: string | number }) {
   return (
     <div className="col-12 col-md-3">
       <div className="card h-100">
         <div className="card-body p-4">
           <span className="text-muted small">{title}</span>
-          <p className="fs-4 fw-semibold mb-0">—</p>
+          <p className="fs-4 fw-semibold mb-0">{value}</p>
         </div>
       </div>
     </div>
   );
 }
-

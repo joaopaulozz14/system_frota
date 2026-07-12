@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import TableOS from "../../components/tableOS";
-
 function OS() {
   return (
     <div className="bg-light h-100" >
