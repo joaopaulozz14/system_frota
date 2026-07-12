@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
  */
 export default function ModeloPaginaOnibus() {
   return (
-    <div className="container-fluid p-4">
+    <div className="p-4">
       {/* Cabeçalho */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="h4 mb-0">Ônibus • Detalhes</h1>

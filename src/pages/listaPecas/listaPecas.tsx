@@ -11,7 +11,7 @@ import TablePecas from "../../components/tablePecas";
 import "./listaPecas.css";
 function ListaPecas() {
   return (
-    <div className="os-container container bg-light">
+    <div className="container bg-light pb-3">
       <div className="row g-3 mb-4 pt-4">
         <div className="col-md-3" style={{ cursor: "pointer" }}>
           <div className="card px-2 shadow-sm cursor-pointer">

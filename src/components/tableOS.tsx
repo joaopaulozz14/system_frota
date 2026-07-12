@@ -16,7 +16,7 @@ function TableOS() {
   }, [totalNumeroPaginacao]);
 
   return (
-    <div className="bg-white p-3 rounded shadow-sm mb-4">
+    <div className="bg-white p-3 rounded shadow-sm">
       <table className="table table-responsive text-center align-middle table-hover">
         <colgroup>
           <col style={{ width: "20px" }} />

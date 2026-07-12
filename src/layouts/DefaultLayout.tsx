@@ -10,7 +10,6 @@ export default function DefaultLayout() {
         <main
           style={{
             marginLeft: "250px",
-            minHeight: "100vh",
             width: "calc(100% - 250px)",
           }}
         >
