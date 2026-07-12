@@ -8,7 +8,7 @@ import Info from "../../components/Info";
  * Versão usando Bootstrap (Cards, Grid e Tables)
  */
 
-export default function ModeloPaginaOnibus() {
+export default function DetalhesOnibus() {
   const navigate = useNavigate();
   const { id } = useParams();
   const bus = onibus.find((b) => b.id === Number(id));

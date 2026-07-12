@@ -1,26 +1,12 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import photo from "../../assets/onibusfoto.jpeg";
-import type { PecaType } from "../../types/pecaType";
-import type { OrdemServicoType } from "../../types/ordemServicoType";
 import { historicoOS } from "../../data/banco";
 import { FaCheck, FaPencilAlt, FaArrowRight } from "react-icons/fa";
 import getOSCompleta from "../../utils/osUtils";
 
-export default function PaginaDetalhesOS() {
+export default function DetalhesOS() {
   const { id } = useParams<{ id: string }>();
   const osCompleta = getOSCompleta(Number(id));
-
-  /* type PecaDaOSType = {
-    peca_id: number;
-    quantidade: number;
-    info?: PecaType;
-  }; */
-  /* const location = useLocation();
-  const os: OrdemServicoType = location.state?.os;
-  const bus = location.state?.bus;
-  const pecasDaOS: PecaDaOSType[] = location.state?.pecasDaOS || []; */
-
-  /*   console.log(pecasDaOS); */
 
   if (!osCompleta) {
     return <div>OS não encontrada</div>;

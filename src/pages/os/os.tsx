@@ -9,9 +9,12 @@ import {
 } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import TableOS from "../../components/tableOS";
+import { useNavigate } from "react-router-dom";
 function OS() {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-light h-100" >
+    <div className="bg-light h-100">
       <div className="container">
         <div className="row g-3 mb-4 pt-4">
           <div className="col-md-3" style={{ cursor: "pointer" }}>
@@ -63,7 +66,7 @@ function OS() {
                   <h4 className="fw-bold text-warning">
                     {
                       ordensDeServico.filter(
-                        (os) => os.status === "Em andamento"
+                        (os) => os.status === "Em andamento",
                       ).length
                     }
                   </h4>
@@ -109,7 +112,11 @@ function OS() {
             <p>Gerencie suas ordens de serviços</p>
           </div>
           <div>
-            <Button variant="primary" className="mb-3">
+            <Button
+              variant="primary"
+              className="mb-3"
+              onClick={() => navigate("/novaOS")}
+            >
               + Adicionar OS
             </Button>
           </div>
